@@ -25,20 +25,14 @@ Acest document descrie arhitectura și planul de dezvoltare pentru o aplicație 
     *   Hook-uri personalizate (`useDarkMode`, `useAuth`) pentru o logică curată.
     *   Stilizare modulară cu fișiere CSS dedicate.
 
-## Planul Curent: Implementarea Meniului de Utilizator
+## Planul Curent: Implementarea Paginii de Schimbare a Parolei
 
-**Solicitare:** Înlocuirea butonului de "Delogare" cu un meniu de utilizator care să conțină opțiunile "Schimbă parola" și "Delogare".
+**Solicitare:** Crearea unei pagini noi unde utilizatorii își pot schimba parola. Pagina trebuie să conțină câmpuri pentru parola veche, parola nouă și confirmarea parolei noi.
 
-**Acțiuni Finalizate:**
-1.  **Modificat `src/components/Header/Header.jsx`:**
-    *   Am adăugat `useState`, `useEffect` și `useRef` pentru a gestiona starea meniului și a detecta click-urile în afara acestuia.
-    *   Am importat iconițele `User` și `KeyRound` din `lucide-react`.
-    *   Am înlocuit butonul de delogare cu o nouă componentă care afișează iconița `User` și gestionează deschiderea meniului.
-    *   Am creat structura JSX pentru meniul derulant.
-2.  **Modificat `src/components/Header/Header.css`:**
-    *   Am adăugat stiluri noi pentru containerul meniului, butonul cu iconiță, meniul derulant și elementele din listă.
-    *   Am asigurat coerența vizuală cu tema existentă (dark/light), adăugând umbre, tranziții și o animație de apariție.
-    *   Am eliminat stilurile CSS care nu mai erau necesare pentru vechiul buton.
-3.  **Actualizat `blueprint.md`:** Am documentat noua funcționalitate.
-
-**Status:** Complet. Meniul de utilizator este complet funcțional din punct de vedere vizual. Opțiunea "Delogare" funcționează, iar opțiunea "Schimbă parola" este pregătită pentru implementarea logicii în pasul următor. Aștept instrucțiunile următoare.
+**Plan de Acțiune:**
+1.  **Creează Pagina Nouă:** Adaugă un nou fișier `src/pages/ChangePassword.jsx` pentru formularul de schimbare a parolei.
+2.  **Stilizează Pagina:** Creează `src/pages/ChangePassword.css` pentru a alinia designul cu restul aplicației.
+3.  **Adaugă Rută Nouă:** Definește o nouă rută protejată `/change-password` în `src/App.jsx`.
+4.  **Actualizează Meniul:** Fă ca opțiunea "Schimbă parola" din `Header.jsx` să navigheze către noua pagină.
+5.  **Implementează Logica Firebase:** Adaugă logica pentru re-autentificare și actualizarea parolei în `ChangePassword.jsx`.
+6.  **Oferă Feedback Vizual:** Folosește `react-toastify` pentru a afișa mesaje de succes sau de eroare.

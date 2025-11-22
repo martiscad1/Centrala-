@@ -24,6 +24,10 @@ html.light {
   --aurora-color-3: rgba(255, 115, 115, 0.3);
   --aurora-color-4: rgba(46, 204, 113, 0.3);
   --aurora-color-5: rgba(241, 196, 15, 0.3);
+
+  /* Variabile pentru butonul de autentificare */
+  --auth-btn-after-bg: #ffffff;
+  --auth-btn-text: #1a1a1a;
 }
 
 /* Setări pentru Dark Mode */
@@ -43,6 +47,10 @@ html.dark {
   --aurora-color-3: rgba(255, 82, 82, 0.2);
   --aurora-color-4: rgba(39, 174, 96, 0.2);
   --aurora-color-5: rgba(250, 170, 50, 0.2);
+
+  /* Variabile pentru butonul de autentificare */
+  --auth-btn-after-bg: #1c1c1c;
+  --auth-btn-text: #ffffff;
 }
 
 body, html, #root {

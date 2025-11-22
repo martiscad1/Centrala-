@@ -4,13 +4,13 @@ import { useAuth } from './hooks/useAuth';
 import { useDarkMode } from './hooks/useDarkMode';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import ChangePassword from './pages/ChangePassword'; // Importăm noua pagină
 import './App.css';
 
 const App = () => {
   const { user, loading } = useAuth();
-  const [theme, toggleTheme] = useDarkMode(); // Hook-ul pentru tema
+  const [theme, toggleTheme] = useDarkMode();
 
-  // Afișează un ecran de încărcare în timp ce se verifică starea autentificării
   if (loading) {
     return (
       <div className="loading-container">
@@ -22,7 +22,6 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      {/* Fundalul animat "aurora" */}
       <div className="aurora-background">
         <div className="aurora-container" id="aurora-1"></div>
         <div className="aurora-container" id="aurora-2"></div>
@@ -32,7 +31,6 @@ const App = () => {
       </div>
       
       <Routes>
-        {/* Ruta pentru pagina principală, accesibilă doar dacă utilizatorul este logat */}
         <Route 
           path="/" 
           element={
@@ -43,10 +41,20 @@ const App = () => {
             )
           } 
         />
-        {/* Ruta pentru pagina de login, accesibilă doar dacă utilizatorul NU este logat */}
         <Route 
           path="/login" 
           element={!user ? <Login /> : <Navigate to="/" />} 
+        />
+        {/* Adăugăm noua rută protejată pentru schimbarea parolei */}
+        <Route 
+          path="/change-password" 
+          element={
+            user ? (
+              <ChangePassword />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
         />
       </Routes>
     </BrowserRouter>

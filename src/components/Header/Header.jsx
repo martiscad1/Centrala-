@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importăm useNavigate
 import { Sun, Moon, User, LogOut, KeyRound } from 'lucide-react';
 import './Header.css';
 
 const Header = ({ theme, toggleTheme, onLogout }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const navigate = useNavigate(); // Inițializăm hook-ul de navigare
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -24,8 +26,9 @@ const Header = ({ theme, toggleTheme, onLogout }) => {
     };
   }, []);
 
+  // Modificăm funcția pentru a naviga la noua pagină
   const handlePasswordChange = () => {
-    console.log("Funcționalitatea 'Schimbă parola' va fi implementată.");
+    navigate('/change-password');
     setIsMenuOpen(false); // Închide meniul după acțiune
   };
 

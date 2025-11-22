@@ -1,0 +1,57 @@
+.status-card {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: 350px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.status-indicator {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    transition: background-color 0.5s ease;
+}
+
+.status-content {
+    flex-grow: 1;
+}
+
+.status-title {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.status-text {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    transition: color 0.5s ease;
+}
+
+/* Stiluri pentru starea inactivă */
+.status-card.inactive .status-indicator {
+    background-color: #e53935; /* Roșu */
+    box-shadow: 0 0 10px #e53935;
+}
+
+.status-card.inactive .status-text {
+    color: #ff7575;
+}
+
+/* Stiluri pentru starea activă */
+.status-card.active .status-indicator {
+    background-color: #43a047; /* Verde */
+    box-shadow: 0 0 10px #43a047;
+}
+
+.status-card.active .status-text {
+    color: #66bb6a;
+}
