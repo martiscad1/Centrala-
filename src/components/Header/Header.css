@@ -3,8 +3,10 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     padding: 1rem 2rem;
-    position: sticky;
+    position: fixed; /* Schimbat din sticky în fixed */
     top: 0;
+    left: 0; /* Adăugat pentru aliniere corectă */
+    right: 0; /* Adăugat pentru aliniere corectă */
     z-index: 1000;
     width: 100%;
     box-sizing: border-box;

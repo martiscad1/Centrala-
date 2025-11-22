@@ -1,40 +1,136 @@
 .home-container {
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    width: 100vw;
+    width: 100%;
+    min-height: 100vh;
     box-sizing: border-box;
+    padding-top: 80px; /* Compensează pentru header-ul fix */
 }
+
+.status-header {
+    width: 100%;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    background-color: transparent;
+    transition: color 0.3s ease;
+}
+
+.status-header h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+    text-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.status-active h2 { color: #2ecc71; }
+.status-inactive h2 { color: #e74c3c; }
+.status-loading h2 { color: var(--text-color); opacity: 0.7; }
 
 .home-content {
     flex-grow: 1;
     display: flex;
     justify-content: center;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
     padding: 2rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.welcome-card {
-    background-color: var(--header-bg); /* Reutilizăm stilul header-ului pentru consistență */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 2rem 3rem;
-    border-radius: 16px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+.sensor-groups-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem;
+    width: 100%;
+    max-width: 900px;
+    padding-bottom: 2rem; /* Adăugăm spațiu la final */
+}
+
+.sensor-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    flex: 1;
+    min-width: 280px;
+}
+
+.sensor-card {
+    background-color: var(--header-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
     border: 1px solid rgba(128, 128, 128, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+    width: 100%;
 }
 
-.welcome-card h1 {
-    margin-top: 0;
-    font-size: 2.5rem;
-    color: var(--text-color);
+.sensor-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    transition: color 0.5s ease, filter 0.5s ease;
+}
+
+.sensor-title {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #FFFFFF;
+    font-weight: 500;
+    opacity: 1;
+    text-align: center;
+}
+
+.temperature-value {
+    font-size: 4rem;
     font-weight: 700;
+    margin: 0;
+    line-height: 1;
+    display: flex;
+    align-items: flex-start;
+    margin-top: 0.5rem;
+    transition: color 0.5s ease;
 }
 
-.welcome-card p {
-    font-size: 1.2rem;
-    color: var(--text-color);
-    opacity: 0.8;
-    line-height: 1.6;
+.temperature-value span {
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-left: 0.25rem;
+    padding-top: 0.4rem;
+}
+
+/* --- Media Queries --- */
+
+@media (max-width: 768px) {
+    .home-content {
+        padding: 2rem 1.5rem;
+    }
+    .sensor-groups-container {
+        flex-direction: column;
+        gap: 2rem;
+        max-width: 450px;
+        margin: 0 auto;
+    }
+    .sensor-group {
+        min-width: initial;
+    }
+}
+
+@media (max-width: 640px) {
+    .home-content {
+        padding: 1.5rem 1rem;
+    }
+
+    .status-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .temperature-value {
+        font-size: 3.8rem;
+    }
 }

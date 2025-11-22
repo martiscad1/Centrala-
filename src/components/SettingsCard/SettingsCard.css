@@ -1,0 +1,98 @@
+.settings-card {
+    background-color: var(--header-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    width: 100%;
+    box-sizing: border-box;
+    transition: box-shadow 0.3s ease;
+}
+
+.settings-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+    padding-bottom: 1rem;
+    margin-bottom: 0.2rem;
+}
+
+.settings-icon {
+    font-size: 1.2rem;
+    color: var(--accent-color);
+    opacity: 0.9;
+}
+
+.settings-title {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #FFFFFF;
+    font-weight: 500;
+}
+
+.settings-body {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    gap: 1.5rem;
+}
+
+.limit-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.limit-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-color);
+    opacity: 0.6;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.limit-value {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-color);
+    line-height: 1;
+    display: flex;
+    align-items: flex-start;
+}
+
+.limit-value span {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-left: 0.2rem;
+    padding-top: 0.2rem;
+}
+
+.edit-button {
+    width: 100%;
+    padding: 0.9rem;
+    border: 1px solid var(--accent-color);
+    background-color: transparent;
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    outline: none;
+}
+
+.edit-button:hover,
+.edit-button:focus {
+    background-color: var(--accent-color);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(var(--accent-color-rgb), 0.5);
+}
