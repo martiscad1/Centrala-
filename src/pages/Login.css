@@ -1,0 +1,173 @@
+.login-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    padding: 2rem;
+    box-sizing: border-box;
+    position: relative;
+  }
+  
+  .login-container {
+    max-width: 400px;
+    width: 100%;
+    background-color: var(--header-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    text-align: center;
+  }
+  
+  .login-form h2 {
+    color: var(--text-color);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+  }
+  
+  .input-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: 1px solid var(--input-border);
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .input-group input:focus {
+    outline: none;
+    border-color: var(--link-color);
+    box-shadow: 0 0 0 3px rgba(114, 137, 218, 0.3);
+  }
+  
+  .auth-btn {
+    position: relative; /* Necesar pentru pseudo-element */
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    background-color: #1c1c1c; /* Fundal închis, solid */
+    color: #fff;
+    cursor: pointer;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s;
+  }
+
+  .auth-btn::before {
+    content: '';
+    position: absolute;
+    top: -2px; left: -2px;
+    right: -2px; bottom: -2px;
+    background: linear-gradient(90deg, #007cf0, #00dfd8, #ff007c, #f89b29, #007cf0);
+    background-size: 400% 100%;
+    border-radius: 14px;
+    z-index: -1;
+    animation: animate-gradient 8s linear infinite;
+    transition: filter 0.3s;
+  }
+
+  .auth-btn:hover::before {
+    filter: blur(4px);
+  }
+
+  .auth-btn:active {
+    color: #d1d1d1; /* Textul devine mai puțin vizibil la apăsare */
+    transform: scale(0.99); /* Efect subtil de apăsare */
+  }
+
+  @keyframes animate-gradient {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 400% 50%; }
+  }
+
+  .auth-btn .auth-btn-icon {
+    color: #c4c4c4;
+    transition: transform 0.4s ease-in-out;
+  }
+
+  .auth-btn:hover .auth-btn-icon {
+    transform: rotate(90deg);
+  }
+  
+  .auth-btn:disabled {
+    background-color: #2a2a2a;
+    cursor: not-allowed;
+    color: #555;
+  }
+
+  .auth-btn:disabled::before {
+    display: none; /* Ascunde chenarul animat când butonul e inactiv */
+  }
+  
+  /* Stiluri pentru react-toastify */
+  .Toastify__toast {
+    background-color: var(--toast-background) !important;
+    color: var(--toast-color) !important;
+    border-radius: var(--toast-border-radius) !important;
+    box-shadow: var(--toast-box-shadow) !important;
+  }
+
+  .Toastify__toast--success {
+    background-color: #28a745 !important;
+    color: white !important;
+  }
+
+  .Toastify__toast--error {
+    background-color: #dc3545 !important;
+    color: white !important;
+  }
+
+  .Toastify__close-button {
+    color: var(--toast-color) !important;
+  }
+
+  .Toastify__progress-bar {
+    background-color: var(--link-color) !important;
+  }
+
+  /* Butonul de comutare a temei pentru pagina de Login */
+  .theme-toggle-btn-login {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background-color: var(--header-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: var(--text-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
+  }
+
+  .theme-toggle-btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .theme-toggle-btn-login:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }

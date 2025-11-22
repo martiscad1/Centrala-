@@ -1,35 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth } from './hooks/useAuth';
+import { useDarkMode } from './hooks/useDarkMode';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const { user, loading } = useAuth();
+  const [theme, toggleTheme] = useDarkMode(); // Hook-ul pentru tema
+
+  // Afișează un ecran de încărcare în timp ce se verifică starea autentificării
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+        <p>Se încarcă...</p>
+      </div>
+    );
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <BrowserRouter>
+      {/* Fundalul animat "aurora" */}
+      <div className="aurora-background">
+        <div className="aurora-container" id="aurora-1"></div>
+        <div className="aurora-container" id="aurora-2"></div>
+        <div className="aurora-container" id="aurora-3"></div>
+        <div className="aurora-container" id="aurora-4"></div>
+        <div className="aurora-container" id="aurora-5"></div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+      
+      <Routes>
+        {/* Ruta pentru pagina principală, accesibilă doar dacă utilizatorul este logat */}
+        <Route 
+          path="/" 
+          element={
+            user ? (
+              <Home theme={theme} toggleTheme={toggleTheme} />
+            ) : (
+              <Navigate to="/login" />
+            )
+          } 
+        />
+        {/* Ruta pentru pagina de login, accesibilă doar dacă utilizatorul NU este logat */}
+        <Route 
+          path="/login" 
+          element={!user ? <Login /> : <Navigate to="/" />} 
+        />
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
-export default App
+export default App;
