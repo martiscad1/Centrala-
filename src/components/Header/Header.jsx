@@ -1,8 +1,39 @@
-import React from 'react';
-import { Sun, Moon, LogOut } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Sun, Moon, User, LogOut, KeyRound } from 'lucide-react';
 import './Header.css';
 
 const Header = ({ theme, toggleTheme, onLogout }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  // Închide meniul la click în afara lui
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handlePasswordChange = () => {
+    console.log("Funcționalitatea 'Schimbă parola' va fi implementată.");
+    setIsMenuOpen(false); // Închide meniul după acțiune
+  };
+
+  const handleLogout = () => {
+    onLogout();
+    setIsMenuOpen(false); // Închide meniul după acțiune
+  };
+
   return (
     <header className="app-header">
       <div className="header-content">
@@ -11,10 +42,27 @@ const Header = ({ theme, toggleTheme, onLogout }) => {
           <button onClick={toggleTheme} className="theme-toggle-btn">
             {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
           </button>
-          <button onClick={onLogout} className="logout-btn">
-            <LogOut size={20} />
-            <span className="logout-text">Delogare</span>
-          </button>
+
+          <div className="user-menu-container" ref={menuRef}>
+            <button onClick={toggleMenu} className="user-menu-btn">
+              <User size={22} />
+            </button>
+
+            {isMenuOpen && (
+              <div className="user-dropdown-menu">
+                <ul>
+                  <li onClick={handlePasswordChange}>
+                    <KeyRound size={18} />
+                    <span>Schimbă parola</span>
+                  </li>
+                  <li onClick={handleLogout}>
+                    <LogOut size={18} />
+                    <span>Delogare</span>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </header>
