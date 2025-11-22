@@ -1,0 +1,143 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    transform: scale(0.95);
+    opacity: 0;
+    animation: scaleIn 0.3s 0.1s forwards;
+    position: relative;
+}
+
+.modal-title {
+    color: var(--text-color);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0 0 2rem 0;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1.5rem;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputs-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem; 
+    width: 100%;
+}
+
+.input-group-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    width: 100%;
+}
+
+.input-group-modal label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-color);
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.input-group-modal input {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border-radius: 10px;
+    border: 1px solid var(--input-border);
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    text-align: center;
+}
+
+.input-group-modal input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(var(--accent-color-rgb), 0.3);
+}
+
+.input-group-modal input[type=number]::-webkit-inner-spin-button, 
+.input-group-modal input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+.input-group-modal input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Containerul pentru butoane - MODIFICAT */
+.modal-actions {
+    display: flex;
+    flex-direction: column; /* Aranjează elementele pe verticală */
+    gap: 1rem; /* Spațiu între butoane */
+    margin-top: 2.5rem;
+    width: 100%; /* Ocupă toată lățimea */
+}
+
+/* Asigură că ambele butoane au lățime completă */
+.modal-actions .auth-btn,
+.modal-actions .btn-secondary {
+    width: 100%;
+    box-sizing: border-box; /* Asigură calculul corect al padding-ului */
+}
+
+.btn-secondary {
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-color);
+    background-color: transparent;
+    border: 1px solid var(--input-border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    opacity: 0.8;
+}
+
+.btn-secondary:hover {
+    background-color: var(--input-bg);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    opacity: 1;
+}
+
+
+/* Animații */
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    to { transform: scale(1); opacity: 1; }
+}

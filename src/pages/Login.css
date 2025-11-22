@@ -58,7 +58,7 @@
     width: 100%;
     padding: 1rem;
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: 400; /* Schimbat din 600 în 400 */
     border: none;
     border-radius: 14px;
     background: transparent;

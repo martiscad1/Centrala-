@@ -25,14 +25,14 @@
 
 .settings-icon {
     font-size: 1.2rem;
-    color: var(--accent-color);
+    color: var(--text-color); /* Am schimbat din --accent-color pentru consistență */
     opacity: 0.9;
 }
 
 .settings-title {
     margin: 0;
     font-size: 1.1rem;
-    color: #FFFFFF;
+    color: var(--text-color); /* Corectat */
     font-weight: 500;
 }
 
@@ -73,26 +73,4 @@
     font-weight: 500;
     margin-left: 0.2rem;
     padding-top: 0.2rem;
-}
-
-.edit-button {
-    width: 100%;
-    padding: 0.9rem;
-    border: 1px solid var(--accent-color);
-    background-color: transparent;
-    color: var(--accent-color);
-    font-size: 0.9rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-    outline: none;
-}
-
-.edit-button:hover,
-.edit-button:focus {
-    background-color: var(--accent-color);
-    color: #fff;
-    box-shadow: 0 0 20px rgba(var(--accent-color-rgb), 0.5);
 }

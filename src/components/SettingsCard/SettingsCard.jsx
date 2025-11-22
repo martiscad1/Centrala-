@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaCog } from 'react-icons/fa';
 import './SettingsCard.css';
+import '../../pages/Login.css'; // Importăm stilurile necesare
 
 const SettingsCard = ({ title, min, max, onEdit }) => {
   return (
@@ -19,9 +20,19 @@ const SettingsCard = ({ title, min, max, onEdit }) => {
           <p className="limit-value">{max !== null ? max : '--'}<span>°C</span></p>
         </div>
       </div>
-      <button className="edit-button" onClick={onEdit}>
-        EDITEAZĂ
-      </button>
+
+      {/* 
+        Aceasta este structura HTML corectă pentru buton,
+        care se bazează pe stilurile din Login.css pentru a funcționa.
+        Containerul este necesar pentru aliniere, iar span-ul interior este
+        folosit pentru text, permițând pseudo-elementelor să creeze efectul vizual.
+      */}
+      <div className="auth-btn-container" style={{ marginTop: '1rem' }}>
+        <button className="auth-btn" onClick={onEdit}>
+          <span>Editează</span>
+        </button>
+      </div>
+
     </div>
   );
 };

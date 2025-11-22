@@ -80,9 +80,9 @@
 .sensor-title {
     margin: 0;
     font-size: 1.1rem;
-    color: #FFFFFF;
+    color: var(--text-color); /* Corectat! */
     font-weight: 500;
-    opacity: 1;
+    opacity: 0.8; /* Am redus opacitatea pentru un contrast mai plăcut */
     text-align: center;
 }
 

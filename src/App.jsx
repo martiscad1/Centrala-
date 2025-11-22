@@ -4,7 +4,9 @@ import { useAuth } from './hooks/useAuth';
 import { useDarkMode } from './hooks/useDarkMode';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import ChangePassword from './pages/ChangePassword'; // Importăm noua pagină
+import ChangePassword from './pages/ChangePassword';
+import { ToastContainer } from 'react-toastify'; // Importăm containerul
+import 'react-toastify/dist/ReactToastify.css'; // Importăm stilurile
 import './App.css';
 
 const App = () => {
@@ -22,6 +24,20 @@ const App = () => {
 
   return (
     <BrowserRouter>
+      {/* Containerul pentru notificări a fost adăugat și configurat aici */}
+      <ToastContainer
+        position="top-right"
+        autoClose={5000} // Timp de afișare mărit la 5 secunde
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme={theme} // Se adaptează automat la tema light/dark
+      />
+
       <div className="aurora-background">
         <div className="aurora-container" id="aurora-1"></div>
         <div className="aurora-container" id="aurora-2"></div>
@@ -45,7 +61,6 @@ const App = () => {
           path="/login" 
           element={!user ? <Login /> : <Navigate to="/" />} 
         />
-        {/* Adăugăm noua rută protejată pentru schimbarea parolei */}
         <Route 
           path="/change-password" 
           element={

@@ -3,7 +3,8 @@ import { getAuth, signOut } from 'firebase/auth';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header/Header';
-import SettingsCard from '../components/SettingsCard/SettingsCard'; // Importăm noua componentă
+import SettingsCard from '../components/SettingsCard/SettingsCard';
+import SettingsModal from '../components/SettingsModal/SettingsModal';
 import { FaTemperatureHigh } from 'react-icons/fa';
 import './Home.css';
 
@@ -12,36 +13,50 @@ const Home = ({ theme, toggleTheme }) => {
   const [releu1Status, setReleu1Status] = useState(null);
   const [senzor1Temp, setSenzor1Temp] = useState(null);
   const [senzor2Temp, setSenzor2Temp] = useState(null);
-  
-  // Stări noi pentru limite
   const [senzor1Limits, setSenzor1Limits] = useState({ min: null, max: null });
   const [senzor2Limits, setSenzor2Limits] = useState({ min: null, max: null });
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [editingSensor, setEditingSensor] = useState(null);
 
   useEffect(() => {
     const db = getDatabase();
     const releu1Ref = ref(db, 'releu1');
     const senzor1Ref = ref(db, 'senzor1');
     const senzor2Ref = ref(db, 'senzor2');
-    const senzor1LimitsRef = ref(db, 'limits/senzor1');
-    const senzor2LimitsRef = ref(db, 'limits/senzor2');
+
+    // Referințe corecte către limitele senzorilor
+    const senzor1MinimRef = ref(db, 'sensor1minim');
+    const senzor1MaximRef = ref(db, 'sensor1maxim');
+    const senzor2MinimRef = ref(db, 'sensor2minim');
+    const senzor2MaximRef = ref(db, 'sensor2maxim');
 
     const unsubscribeReleu1 = onValue(releu1Ref, (snapshot) => setReleu1Status(snapshot.val()));
     const unsubscribeSenzor1 = onValue(senzor1Ref, (snapshot) => setSenzor1Temp(snapshot.val()));
     const unsubscribeSenzor2 = onValue(senzor2Ref, (snapshot) => setSenzor2Temp(snapshot.val()));
-    
-    const unsubscribeSenzor1Limits = onValue(senzor1LimitsRef, (snapshot) => {
-      setSenzor1Limits(snapshot.val() || { min: null, max: null });
+
+    // Ascultăm fiecare limită individual și actualizăm starea corespunzător
+    const unsubscribeSenzor1Min = onValue(senzor1MinimRef, (snapshot) => {
+      setSenzor1Limits(prevLimits => ({ ...prevLimits, min: snapshot.val() }));
     });
-    const unsubscribeSenzor2Limits = onValue(senzor2LimitsRef, (snapshot) => {
-      setSenzor2Limits(snapshot.val() || { min: null, max: null });
+    const unsubscribeSenzor1Max = onValue(senzor1MaximRef, (snapshot) => {
+      setSenzor1Limits(prevLimits => ({ ...prevLimits, max: snapshot.val() }));
+    });
+    const unsubscribeSenzor2Min = onValue(senzor2MinimRef, (snapshot) => {
+      setSenzor2Limits(prevLimits => ({ ...prevLimits, min: snapshot.val() }));
+    });
+    const unsubscribeSenzor2Max = onValue(senzor2MaximRef, (snapshot) => {
+      setSenzor2Limits(prevLimits => ({ ...prevLimits, max: snapshot.val() }));
     });
 
+    // Returnăm funcțiile de unsubscribe pentru a curăța ascultătorii la demontare
     return () => {
       unsubscribeReleu1();
       unsubscribeSenzor1();
       unsubscribeSenzor2();
-      unsubscribeSenzor1Limits();
-      unsubscribeSenzor2Limits();
+      unsubscribeSenzor1Min();
+      unsubscribeSenzor1Max();
+      unsubscribeSenzor2Min();
+      unsubscribeSenzor2Max();
     };
   }, []);
 
@@ -54,10 +69,16 @@ const Home = ({ theme, toggleTheme }) => {
       console.error("Eroare la delogare:", error);
     }
   };
+  
+  const openSettingsModal = (sensorId) => {
+    setEditingSensor(sensorId);
+    setModalOpen(true);
+  };
 
-  // Funcții placeholder pentru butoanele de editare
-  const handleEditSenzor1 = () => console.log("Editare Senzor 1");
-  const handleEditSenzor2 = () => console.log("Editare Senzor 2");
+  const closeSettingsModal = () => {
+    setModalOpen(false);
+    setEditingSensor(null);
+  };
 
   const getStatusText = () => releu1Status === null ? "Se încarcă statusul..." : releu1Status === 1 ? "Pompa activă" : "Pompa oprită";
   const getStatusClass = () => releu1Status === null ? 'status-loading' : releu1Status === 1 ? 'status-active' : 'status-inactive';
@@ -108,7 +129,7 @@ const Home = ({ theme, toggleTheme }) => {
               title="Setare Limite Senzor 1"
               min={senzor1Limits.min}
               max={senzor1Limits.max}
-              onEdit={handleEditSenzor1}
+              onEdit={() => openSettingsModal('senzor1')} 
             />
           </div>
 
@@ -125,11 +146,18 @@ const Home = ({ theme, toggleTheme }) => {
               title="Setare Limite Senzor 2"
               min={senzor2Limits.min}
               max={senzor2Limits.max}
-              onEdit={handleEditSenzor2}
+              onEdit={() => openSettingsModal('senzor2')} 
             />
           </div>
         </div>
       </main>
+
+      {isModalOpen && (
+        <SettingsModal 
+          onClose={closeSettingsModal} 
+          sensorId={editingSensor} 
+        />
+      )}
     </div>
   );
 };
