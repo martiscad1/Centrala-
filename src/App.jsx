@@ -5,8 +5,8 @@ import { useDarkMode } from './hooks/useDarkMode';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import ChangePassword from './pages/ChangePassword';
-import { ToastContainer } from 'react-toastify'; // Importăm containerul
-import 'react-toastify/dist/ReactToastify.css'; // Importăm stilurile
+// ToastContainer a fost eliminat de aici
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 const App = () => {
@@ -24,28 +24,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      {/* Containerul pentru notificări a fost adăugat și configurat aici */}
-      <ToastContainer
-        position="top-right"
-        autoClose={5000} // Timp de afișare mărit la 5 secunde
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme={theme} // Se adaptează automat la tema light/dark
-      />
-
-      <div className="aurora-background">
-        <div className="aurora-container" id="aurora-1"></div>
-        <div className="aurora-container" id="aurora-2"></div>
-        <div className="aurora-container" id="aurora-3"></div>
-        <div className="aurora-container" id="aurora-4"></div>
-        <div className="aurora-container" id="aurora-5"></div>
-      </div>
-      
+      {/* ToastContainer a fost mutat în main.jsx pentru a fi la nivel global */}
       <Routes>
         <Route 
           path="/" 

@@ -129,33 +129,7 @@
   .auth-btn:disabled::after {
     display: none;
   }
-  
-  /* Stiluri pentru react-toastify */
-  .Toastify__toast {
-    background-color: var(--toast-background) !important;
-    color: var(--toast-color) !important;
-    border-radius: var(--toast-border-radius) !important;
-    box-shadow: var(--toast-box-shadow) !important;
-  }
-
-  .Toastify__toast--success {
-    background-color: #28a745 !important;
-    color: white !important;
-  }
-
-  .Toastify__toast--error {
-    background-color: #dc3545 !important;
-    color: white !important;
-  }
-
-  .Toastify__close-button {
-    color: var(--toast-color) !important;
-  }
-
-  .Toastify__progress-bar {
-    background-color: var(--link-color) !important;
-  }
-
+    
   /* Butonul de comutare a temei pentru pagina de Login */
   .theme-toggle-btn-login {
     position: absolute;

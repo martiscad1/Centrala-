@@ -32,7 +32,7 @@ Acest document descrie arhitectura și planul de dezvoltare pentru o aplicație 
     *   **Temă Duală (Dark/Light Mode):** Comutator de temă disponibil pe toate paginile principale, cu persistență între sesiuni.
     *   **Meniu Utilizator Derulant:** O iconiță de utilizator care, la click, deschide un meniu elegant cu opțiunile "Schimbă parola" și "Delogare".
     *   **Buton de Autentificare Premium:** Butonul "Intră în cont" are un design deosebit, cu un fundal întunecat, o iconiță `Sparkles` și un chenar cu gradient animat.
-    *   **Fundal Dinamic "Aurora":** Un fundal animat, subtil, care adaugă profunzime și un aspect vizual plăcut.
+    *   **Fundal Static cu Gradient:** Am înlocuit animația "Aurora" cu un gradient subtil și elegant, specific pentru fiecare temă (Light/Dark).
     *   **Feedback vizual:** Utilizarea librăriei `react-toastify` pentru notificări non-invazive.
     *   **Corecturi de text:** Am ajustat textul pentru a folosi diacriticele corecte (ex: "Centrală").
 

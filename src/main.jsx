@@ -1,12 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import './firebase.js'; // Import pentru inițializarea Firebase
-import './App.css'; // Import ESENȚIAL pentru stilurile globale
-import './index.css'; // Importat după App.css, dar este gol, deci nu afectează
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './firebase.js';
+import './App.css';
+import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
+    <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="colored" // Va folosi culorile definite de noi în CSS
+    />
   </React.StrictMode>
 );

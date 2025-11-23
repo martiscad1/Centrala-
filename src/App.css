@@ -1,16 +1,15 @@
 /* Stiluri de bază și variabile de culoare */
 :root {
   --font-main: 'Poppins', sans-serif;
-  --toast-background: #fff;
-  --toast-color: #333;
-  --toast-border-radius: 8px;
-  --toast-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --toast-border-radius: 12px; 
+  --toast-box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  --toast-z-index: 9999; /* Z-index ridicat pentru a apărea peste modale */
 }
 
 /* Setări pentru Light Mode */
 html.light {
-  --background-start: #f2f2f2;
-  --background-end: #e0e0e0;
+  --background-start: #FDFBFB;
+  --background-end: #EAEAEA;
   --text-color: #1a1a1a;
   --input-bg: #fff;
   --input-border: #ccc;
@@ -19,19 +18,20 @@ html.light {
   --btn-text: #ffffff;
   --link-color: #5865f2;
   --header-bg: rgba(255, 255, 255, 0.8);
-  --aurora-color-1: rgba(88, 101, 242, 0.3);
-  --aurora-color-2: rgba(114, 137, 218, 0.3);
-  --aurora-color-3: rgba(255, 115, 115, 0.3);
-  --aurora-color-4: rgba(46, 204, 113, 0.3);
-  --aurora-color-5: rgba(241, 196, 15, 0.3);
   --auth-btn-after-bg: #ffffff;
   --auth-btn-text: #1a1a1a;
+  /* Culori pentru notificări - Light */
+  --toast-bg-light: rgba(255, 255, 255, 0.8);
+  --toast-color-light: #1a1a1a;
+  --toast-icon-color-success: #28a745;
+  --toast-icon-color-error: #dc3545;
+  --toast-icon-color-warn: #ffc107;
 }
 
 /* Setări pentru Dark Mode */
 html.dark {
-  --background-start: #1a1a1a;
-  --background-end: #101010;
+  --background-start: #102A43;
+  --background-end: #0D1117;
   --text-color: #f0f0f0;
   --input-bg: #2a2a2a;
   --input-border: #444;
@@ -40,66 +40,83 @@ html.dark {
   --btn-text: #ffffff;
   --link-color: #7289da;
   --header-bg: rgba(26, 26, 26, 0.8);
-  --aurora-color-1: rgba(88, 101, 242, 0.2);
-  --aurora-color-2: rgba(114, 137, 218, 0.2);
-  --aurora-color-3: rgba(255, 82, 82, 0.2);
-  --aurora-color-4: rgba(39, 174, 96, 0.2);
-  --aurora-color-5: rgba(250, 170, 50, 0.2);
   --auth-btn-after-bg: #1c1c1c;
   --auth-btn-text: #ffffff;
+  /* Culori pentru notificări - Dark */
+  --toast-bg-dark: rgba(26, 38, 54, 0.85);
+  --toast-color-dark: #f0f0f0;
+  --toast-icon-color-success: #34D399; 
+  --toast-icon-color-error: #F87171; 
+  --toast-icon-color-warn: #FBBF24; 
 }
 
-html, body {
+/* Aplicarea noului fundal cu gradient */
+html, body, #root {
   margin: 0;
   padding: 0;
   width: 100%;
-  min-height: 100%;
+  min-height: 100vh;
   font-family: var(--font-main);
   color: var(--text-color);
-  background: var(--background-end);
-  /* Am eliminat overflow-x de aici */
+  background: linear-gradient(to bottom, var(--background-start), var(--background-end));
+  background-attachment: fixed;
+  overflow-x: hidden;
 }
 
-#root {
-    width: 100%;
-    min-height: 100vh;
-    background: linear-gradient(135deg, var(--background-start), var(--background-end));
-    isolation: isolate;
-    overflow-x: hidden; /* Previne scroll-ul orizontal aici */
+/* --- Stiluri GLOBALE pentru React-Toastify --- */
+.Toastify__toast-container {
+    z-index: var(--toast-z-index) !important;
 }
 
-
-/* Container pentru animația aurora */
-.aurora-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1; 
-  overflow: hidden;
+.Toastify__toast {
+  border-radius: var(--toast-border-radius) !important;
+  box-shadow: var(--toast-box-shadow) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(128, 128, 128, 0.1);
 }
 
-.aurora-container {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  filter: blur(100px);
-  opacity: 0.6;
+html.light .Toastify__toast {
+  background-color: var(--toast-bg-light) !important;
+  color: var(--toast-color-light) !important;
 }
 
-#aurora-1 { background-color: var(--aurora-color-1); animation: move 25s infinite; }
-#aurora-2 { background-color: var(--aurora-color-2); animation: move 30s infinite -5s; }
-#aurora-3 { background-color: var(--aurora-color-3); animation: move 35s infinite -10s; }
-#aurora-4 { background-color: var(--aurora-color-4); animation: move 40s infinite -15s; }
-#aurora-5 { background-color: var(--aurora-color-5); animation: move 45s infinite -20s; }
-
-@keyframes move {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  25% { transform: translate(40vw, 30vh) scale(1.2); }
-  50% { transform: translate(10vw, -20vh) scale(0.8); }
-  75% { transform: translate(-30vw, 25vh) scale(1.1); }
+html.dark .Toastify__toast {
+  background-color: var(--toast-bg-dark) !important;
+  color: var(--toast-color-dark) !important;
 }
+
+.Toastify__toast--success, 
+.Toastify__toast--error, 
+.Toastify__toast--warning {
+  background-color: transparent !important;
+}
+
+/* Iconițe colorate pe baza temei */
+html.light .Toastify__toast--success .Toastify__toast-icon, 
+html.light .Toastify__toast--success svg { color: var(--toast-icon-color-success) !important; }
+html.light .Toastify__toast--error .Toastify__toast-icon,
+html.light .Toastify__toast--error svg { color: var(--toast-icon-color-error) !important; }
+html.light .Toastify__toast--warning .Toastify__toast-icon, 
+html.light .Toastify__toast--warning svg { color: var(--toast-icon-color-warn) !important; }
+
+html.dark .Toastify__toast--success .Toastify__toast-icon, 
+html.dark .Toastify__toast--success svg { color: var(--toast-icon-color-success) !important; }
+html.dark .Toastify__toast--error .Toastify__toast-icon, 
+html.dark .Toastify__toast--error svg { color: var(--toast-icon-color-error) !important; }
+html.dark .Toastify__toast--warning .Toastify__toast-icon, 
+html.dark .Toastify__toast--warning svg { color: var(--toast-icon-color-warn) !important; }
+
+.Toastify__close-button {
+  color: var(--text-color) !important;
+  opacity: 0.7;
+}
+.Toastify__close-button:hover { opacity: 1; }
+
+.Toastify__progress-bar {
+  background: var(--link-color) !important;
+}
+
 
 /* Container pentru loading spinner */
 .loading-container {
@@ -109,7 +126,7 @@ html, body {
   align-items: center;
   height: 100vh;
   width: 100vw;
-  background: var(--background-end);
+  background: linear-gradient(to bottom, var(--background-start), var(--background-end));
 }
 
 .loading-spinner {
