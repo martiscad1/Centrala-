@@ -20,6 +20,7 @@ html.light {
   --header-bg: rgba(255, 255, 255, 0.8);
   --auth-btn-after-bg: #ffffff;
   --auth-btn-text: #1a1a1a;
+  --accent-contrast-text-color: var(--text-color);
   /* Culori pentru notificări - Light */
   --toast-bg-light: rgba(255, 255, 255, 0.8);
   --toast-color-light: #1a1a1a;
@@ -42,6 +43,7 @@ html.dark {
   --header-bg: rgba(26, 26, 26, 0.8);
   --auth-btn-after-bg: #1c1c1c;
   --auth-btn-text: #ffffff;
+  --accent-contrast-text-color: #ffffff;
   /* Culori pentru notificări - Dark */
   --toast-bg-dark: rgba(26, 38, 54, 0.85);
   --toast-color-dark: #f0f0f0;

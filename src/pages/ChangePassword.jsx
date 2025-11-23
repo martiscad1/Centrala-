@@ -92,7 +92,7 @@ const ChangePassword = () => {
                     <button type="submit" className="auth-btn" disabled={loading}>
                         {loading ? 'Se procesează...' : 'Schimbă Parola'}
                     </button>
-                    <button type="button" className="auth-btn" onClick={() => navigate('/')}>
+                    <button type="button" className="btn-secondary" onClick={() => navigate('/')}>
                         Anulează
                     </button>
                 </div>

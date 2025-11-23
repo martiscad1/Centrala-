@@ -1,109 +1,121 @@
+/* Variabile specifice pentru grafic */
 :root {
     --chart-bar-color: #8884d8;
     --chart-bar-hover-color: #7a75c4;
-  }
-  
-  .pump-chart-container {
+}
+
+/* Animația pentru gradient */
+@keyframes animate-gradient {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 400% 50%; }
+}
+
+.pump-chart-container {
     padding: 2rem;
     border-radius: 20px;
     margin-top: 2rem;
     background: transparent;
     box-shadow: none;
-  }
+}
 
-  .chart-header {
+.chart-header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 2rem;
     margin-bottom: 2rem;
-  }
-  
-  .chart-title {
+}
+
+.chart-title {
     font-size: 1.5rem;
     font-weight: 600;
-    margin: 0; /* Am scos marginea de jos pentru a o controla prin gap */
+    margin: 0;
     text-align: center;
-  }
+}
 
-  .day-selector {
+/* Containerul pentru butoanele-cerc */
+.day-selector {
     display: flex;
-    gap: 0.8rem;
-    background-color: var(--card-bg);
-    padding: 0.5rem;
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-  }
-
-  .day-selector button {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--text-color);
+    gap: 1.5rem;
     background-color: transparent;
+    padding: 0;
     border: none;
-    border-radius: 8px;
+}
+
+/* Stilul de bază pentru butoanele-cerc */
+.day-selector button {
+    width: 64px;
+    height: 64px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-color);
+    background-color: var(--auth-btn-after-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    opacity: 0.7;
-  }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+}
 
-  .day-selector button:hover {
-    opacity: 1;
-    background-color: rgba(var(--accent-color-rgb), 0.1);
-  }
+.day-selector button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0, 0.1);
+}
 
-  .day-selector button.active {
-    background-color: var(--accent-color);
-    color: #fff;
-    opacity: 1;
-    box-shadow: 0 4px 12px rgba(var(--accent-color-rgb), 0.3);
-  }
-  
-  .custom-tooltip {
+/* --- SOLUȚIA FINALĂ PENTRU BUTONUL ACTIV --- */
+.day-selector button.active {
+    color: var(--accent-color);
+    font-weight: 700;
+    
+    /* 1. Setăm o bordură transparentă de 2px */
+    border: 2px solid transparent;
+
+    /* 2. Definim două fundaluri: unul solid și unul cu gradient */
+    background-image: 
+        /* Fundalul interior, 100% opac */
+        linear-gradient(var(--auth-btn-after-bg), var(--auth-btn-after-bg)),
+        /* Fundalul exterior, cu gradient */
+        linear-gradient(90deg, #007cf0, #00dfd8, #ff007c, #f89b29, #007cf0);
+
+    /* 3. Poziționăm ambele fundaluri în "cutia" bordurii */
+    background-origin: border-box;
+
+    /* 4. AICI E MAGIA: Tăiem fundalurile */
+    background-clip: 
+        padding-box, /* Fundalul solid este vizibil doar în interior (padding) */
+        border-box;  /* Gradientul este vizibil doar în exterior (border) */
+
+    /* 5. Setăm dimensiunea pentru gradientul animat */
+    background-size: 100% 100%, 400% 100%;
+
+    /* 6. Pornim animația */
+    animation: animate-gradient 8s linear infinite;
+}
+
+
+/* Restul stilurilor rămân la fel */
+.custom-tooltip {
     background-color: rgba(30, 30, 30, 0.85);
     border: 1px solid #555;
     padding: 10px 15px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     color: #f1f1f1;
-  }
-  
-  .custom-tooltip .label {
+}
+
+.custom-tooltip .label {
     font-weight: bold;
     margin-bottom: 5px;
-  }
+}
 
-  .recharts-bar-rectangle path:hover {
+.recharts-bar-rectangle path:hover {
     fill: var(--chart-bar-hover-color);
-  }
+}
 
-  .chart-loading-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 400px;
-    padding: 2rem;
-    border-radius: 20px;
-    margin-top: 2rem;
-    background: transparent;
-    color: var(--text-color);
-  }
-
-  .loading-spinner {
-    border: 4px solid rgba(255, 255, 255, 0.2);
-    border-left-color: var(--primary-color);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-    margin-bottom: 1rem;
-  }
-
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  
+.chart-loading-container, .loading-spinner, @keyframes spin { 
+    display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 400px; padding: 2rem; border-radius: 20px; margin-top: 2rem; background: transparent; color: var(--text-color);
+}
+.loading-spinner { border: 4px solid rgba(255, 255, 255, 0.2); border-left-color: var(--primary-color); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 1rem; }
+@keyframes spin { to { transform: rotate(360deg); } }
