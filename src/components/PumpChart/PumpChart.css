@@ -7,15 +7,57 @@
     padding: 2rem;
     border-radius: 20px;
     margin-top: 2rem;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .chart-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
   }
   
   .chart-title {
     font-size: 1.5rem;
     font-weight: 600;
-    margin-bottom: 2rem;
+    margin: 0; /* Am scos marginea de jos pentru a o controla prin gap */
     text-align: center;
+  }
+
+  .day-selector {
+    display: flex;
+    gap: 0.8rem;
+    background-color: var(--card-bg);
+    padding: 0.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+  }
+
+  .day-selector button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-color);
+    background-color: transparent;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    opacity: 0.7;
+  }
+
+  .day-selector button:hover {
+    opacity: 1;
+    background-color: rgba(var(--accent-color-rgb), 0.1);
+  }
+
+  .day-selector button.active {
+    background-color: var(--accent-color);
+    color: #fff;
+    opacity: 1;
+    box-shadow: 0 4px 12px rgba(var(--accent-color-rgb), 0.3);
   }
   
   .custom-tooltip {
@@ -36,19 +78,17 @@
     fill: var(--chart-bar-hover-color);
   }
 
-  /* Stil pentru containerul de încărcare */
   .chart-loading-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 400px; /* Aceeași înălțime ca și graficul */
+    min-height: 400px;
     padding: 2rem;
     border-radius: 20px;
     margin-top: 2rem;
-    background-color: var(--card-bg-color);
+    background: transparent;
     color: var(--text-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   .loading-spinner {

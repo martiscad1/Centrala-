@@ -1,3 +1,4 @@
+/* Revenim la overlay-ul cu blur */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -15,14 +16,15 @@
     animation: fadeIn 0.3s forwards;
 }
 
+/* Păstrăm conținutul modalului transparent */
 .modal-content {
-    background-color: var(--card-bg);
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
     padding: 2.5rem;
     border-radius: 20px;
     width: 90%;
     max-width: 450px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-    border: 1px solid var(--border-color);
     transform: scale(0.95);
     opacity: 0;
     animation: scaleIn 0.3s 0.1s forwards;
@@ -96,20 +98,18 @@
   -moz-appearance: textfield;
 }
 
-/* Containerul pentru butoane - MODIFICAT */
 .modal-actions {
     display: flex;
-    flex-direction: column; /* Aranjează elementele pe verticală */
-    gap: 1rem; /* Spațiu între butoane */
+    flex-direction: column;
+    gap: 1rem;
     margin-top: 2.5rem;
-    width: 100%; /* Ocupă toată lățimea */
+    width: 100%;
 }
 
-/* Asigură că ambele butoane au lățime completă */
 .modal-actions .auth-btn,
 .modal-actions .btn-secondary {
     width: 100%;
-    box-sizing: border-box; /* Asigură calculul corect al padding-ului */
+    box-sizing: border-box;
 }
 
 .btn-secondary {
@@ -131,7 +131,6 @@
     color: var(--accent-color);
     opacity: 1;
 }
-
 
 /* Animații */
 @keyframes fadeIn {

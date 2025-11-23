@@ -29,8 +29,11 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 const PumpChart = ({ theme }) => {
+  const [fullData, setFullData] = useState([]);
   const [chartData, setChartData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [numberOfDays, setNumberOfDays] = useState(30);
+  const dayOptions = [10, 20, 30, 40];
 
   useEffect(() => {
     const pumpRef = ref(realtimeDB, 'timpPompaActiva');
@@ -56,7 +59,6 @@ const PumpChart = ({ theme }) => {
 
             return {
               dateObj,
-              // MODIFICARE: Am adăugat anul la formatul datei
               date: `${String(dateParts[0]).padStart(2, '0')}.${String(dateParts[1]).padStart(2, '0')}.${dateParts[2]}`,
               hours: parseFloat((minutes / 60).toFixed(2)),
             };
@@ -64,9 +66,7 @@ const PumpChart = ({ theme }) => {
           .filter(Boolean);
 
         parsedData.sort((a, b) => a.dateObj - b.dateObj);
-        const recentData = parsedData.slice(-30);
-
-        setChartData(recentData);
+        setFullData(parsedData);
       }
       setLoading(false);
     }, (error) => {
@@ -76,6 +76,13 @@ const PumpChart = ({ theme }) => {
 
     return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    if (fullData.length > 0) {
+      const recentData = fullData.slice(-numberOfDays);
+      setChartData(recentData);
+    }
+  }, [fullData, numberOfDays]);
 
   if (loading) {
     return (
@@ -87,17 +94,29 @@ const PumpChart = ({ theme }) => {
   }
 
   return (
-    <div className="pump-chart-container card-background">
-      <h3 className="chart-title">Timp Funcționare Pompă (Ultimele 30 de zile)</h3>
+    <div className="pump-chart-container">
+        <div className="chart-header">
+            <h3 className="chart-title">Timp funcționare pompă în ultimele {numberOfDays} de zile</h3>
+            <div className="day-selector">
+                {dayOptions.map(days => (
+                <button 
+                    key={days} 
+                    onClick={() => setNumberOfDays(days)}
+                    className={numberOfDays === days ? 'active' : ''}
+                >
+                    {days} zile
+                </button>
+                ))}
+            </div>
+        </div>
       <ResponsiveContainer width="100%" height={400}>
         <BarChart
           data={chartData}
-          margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
           barGap={10}
           barCategoryGap="20%"
         >
           <CartesianGrid strokeDasharray="3 3" stroke={theme === 'dark' ? '#444' : '#ccc'} />
-          {/* Am ascuns etichetele de pe axa X adăugând tickLine={false} și tick={false} */}
           <XAxis dataKey="date" tickLine={false} tick={false} />
           <YAxis unit=" ore" tick={{ fill: theme === 'dark' ? '#f1f1f1' : '#333' }} />
           <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(128, 128, 128, 0.1)' }}/>
