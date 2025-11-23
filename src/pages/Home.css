@@ -29,11 +29,12 @@
 .home-content {
     flex-grow: 1;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column; /* Așează elementele pe verticală */
+    align-items: center;    /* Centrează containerul de carduri și graficul */
     padding: 2rem;
     width: 100%;
     box-sizing: border-box;
+    gap: 2rem; /* Adaugă spațiu între carduri și grafic */
 }
 
 .sensor-groups-container {
@@ -43,7 +44,7 @@
     gap: 2.5rem;
     width: 100%;
     max-width: 900px;
-    padding-bottom: 2rem; /* Adăugăm spațiu la final */
+    /* Am eliminat padding-bottom deoarece folosim gap pe părinte */
 }
 
 .sensor-group {
@@ -80,9 +81,9 @@
 .sensor-title {
     margin: 0;
     font-size: 1.1rem;
-    color: var(--text-color); /* Corectat! */
+    color: var(--text-color);
     font-weight: 500;
-    opacity: 0.8; /* Am redus opacitatea pentru un contrast mai plăcut */
+    opacity: 0.8;
     text-align: center;
 }
 
@@ -102,6 +103,13 @@
     font-weight: 500;
     margin-left: 0.25rem;
     padding-top: 0.4rem;
+}
+
+/* Modificare pentru a asigura ca și graficul se întinde pe lățimea maximă disponibilă */
+.pump-chart-container {
+    width: 100%;
+    max-width: 900px; /* Aliniem lățimea la cea a containerului de carduri */
+    margin-top: 0; /* Margin-top este acum gestionat de 'gap' pe .home-content */
 }
 
 /* --- Media Queries --- */

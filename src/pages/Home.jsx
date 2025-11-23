@@ -6,6 +6,7 @@ import Header from '../components/Header/Header';
 import SettingsCard from '../components/SettingsCard/SettingsCard';
 import SettingsModal from '../components/SettingsModal/SettingsModal';
 import { FaTemperatureHigh } from 'react-icons/fa';
+import PumpChart from '../components/PumpChart/PumpChart'; // Am adăugat importul aici
 import './Home.css';
 
 const Home = ({ theme, toggleTheme }) => {
@@ -23,8 +24,6 @@ const Home = ({ theme, toggleTheme }) => {
     const releu1Ref = ref(db, 'releu1');
     const senzor1Ref = ref(db, 'senzor1');
     const senzor2Ref = ref(db, 'senzor2');
-
-    // Referințe corecte către limitele senzorilor
     const senzor1MinimRef = ref(db, 'sensor1minim');
     const senzor1MaximRef = ref(db, 'sensor1maxim');
     const senzor2MinimRef = ref(db, 'sensor2minim');
@@ -33,8 +32,6 @@ const Home = ({ theme, toggleTheme }) => {
     const unsubscribeReleu1 = onValue(releu1Ref, (snapshot) => setReleu1Status(snapshot.val()));
     const unsubscribeSenzor1 = onValue(senzor1Ref, (snapshot) => setSenzor1Temp(snapshot.val()));
     const unsubscribeSenzor2 = onValue(senzor2Ref, (snapshot) => setSenzor2Temp(snapshot.val()));
-
-    // Ascultăm fiecare limită individual și actualizăm starea corespunzător
     const unsubscribeSenzor1Min = onValue(senzor1MinimRef, (snapshot) => {
       setSenzor1Limits(prevLimits => ({ ...prevLimits, min: snapshot.val() }));
     });
@@ -48,7 +45,6 @@ const Home = ({ theme, toggleTheme }) => {
       setSenzor2Limits(prevLimits => ({ ...prevLimits, max: snapshot.val() }));
     });
 
-    // Returnăm funcțiile de unsubscribe pentru a curăța ascultătorii la demontare
     return () => {
       unsubscribeReleu1();
       unsubscribeSenzor1();
@@ -150,6 +146,9 @@ const Home = ({ theme, toggleTheme }) => {
             />
           </div>
         </div>
+        
+        {/* Aici am adăugat noua componentă de grafic */}
+        <PumpChart theme={theme} />
       </main>
 
       {isModalOpen && (
