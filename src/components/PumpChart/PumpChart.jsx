@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { realtimeDB } from '../../firebase';
 import { ref, onValue } from 'firebase/database';
 import {
@@ -9,7 +9,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-} from 'recharts'; // Am eliminat importul pentru Legend
+} from 'recharts';
 import './PumpChart.css';
 
 const CustomTooltip = ({ active, payload, label }) => {
@@ -29,7 +29,6 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 const PumpChart = ({ theme }) => {
   const [fullData, setFullData] = useState([]);
-  const [chartData, setChartData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [numberOfDays, setNumberOfDays] = useState(30);
   const dayOptions = [10, 20, 30, 40];
@@ -76,11 +75,11 @@ const PumpChart = ({ theme }) => {
     return () => unsubscribe();
   }, []);
 
-  useEffect(() => {
+  const chartData = useMemo(() => {
     if (fullData.length > 0) {
-      const recentData = fullData.slice(-numberOfDays);
-      setChartData(recentData);
+      return fullData.slice(-numberOfDays);
     }
+    return [];
   }, [fullData, numberOfDays]);
 
   if (loading) {
@@ -119,7 +118,6 @@ const PumpChart = ({ theme }) => {
           <XAxis dataKey="date" tickLine={false} tick={false} />
           <YAxis unit=" ore" tick={{ fill: theme === 'dark' ? '#f1f1f1' : '#333' }} />
           <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(128, 128, 128, 0.1)' }}/>
-          {/* Am eliminat componenta <Legend /> de aici */}
           <Bar dataKey="hours" name="Ore de funcționare" fill="var(--chart-bar-color)" radius={[5, 5, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>

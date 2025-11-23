@@ -8,7 +8,7 @@ Acest document descrie arhitectura și planul de dezvoltare pentru o aplicație 
 
 *   **Autentificare și Securitate:**
     *   Integrare completă cu Firebase Authentication.
-    *   Pagina de autentificare (`/login`) cu funcționalitate de login securizată.
+    *   Pagină de autentificare (`/login`) cu funcționalitate de login securizată.
     *   Pagină dedicată pentru schimbarea parolei (`/change-password`) cu validări corespunzătoare.
     *   O rută privată (`/`) accesibilă doar utilizatorilor autentificați.
 
@@ -36,6 +36,15 @@ Acest document descrie arhitectura și planul de dezvoltare pentru o aplicație 
     *   **Feedback vizual:** Utilizarea librăriei `react-toastify` pentru notificări non-invazive.
     *   **Corecturi de text:** Am ajustat textul pentru a folosi diacriticele corecte (ex: "Centrală").
 
+*   **Grafic de Performanță:**
+    *   Afișează un grafic cu bare care arată timpul de funcționare al pompei în ultimele zile.
+    *   Selector interactiv pentru a vizualiza datele pe diferite intervale (10, 20, 30, 40 de zile).
+    *   Design curat și tooltip-uri personalizate pentru o lizibilitate maximă.
+
+*   **Finisaje și Optimizări:**
+    *   **Eliminare Contur Grafic:** Am eliminat chenarul vizual care apărea la click pe grafic, pentru o experiență mai curată.
+    *   **Optimizare Performanță React:** Am refactorizat componenta graficului (`PumpChart`) folosind hook-ul `useMemo` pentru a preveni randări inutile și a îmbunătăți eficiența.
+    
 *   **Design Responsiv:**
     *   Interfața este optimizată pentru dispozitive mobile și desktop.
 
